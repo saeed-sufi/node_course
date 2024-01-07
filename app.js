@@ -1,35 +1,23 @@
-import chalk from 'chalk'
-import notes from './notes.js'
-import fs from 'fs'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
-const argv = yargs(hideBin(process.argv)).usage('Count the lines in a file.\nUsage: $0')
-    .demand('f')
-    .alias('f', 'file')
-    .describe('f', 'Load a file').argv
+let argv = yargs(hideBin(process.argv))
+    .command('add', 'Add a new note.', () => {
+        console.log('Hi there')
+    })
+    .command('remove', 'Remove a note', () => {
+        console.log('Removing a note...')
+    })
+    .command('list', 'List the notes', listNotes)
+    .command('read', 'Read a note', readNote)
+    .help('h')
+    .alias('h', 'help')
+    .parse()
 
-if (argv.ships > 3) {
-    console.log('Plunder more riffiwobbles!');
-} else {
-    console.log('Retreat from the xupptumblers!');
+function listNotes() {
+    console.log('Listing the notes...')
 }
 
-console.log(argv)
-console.log('(%d,%d)', argv.x, argv.y)
-console.log(argv._)
-
-
-
-
-console.log(argv.file)
-var s = fs.createReadStream(argv.file);
-
-var lines = 0;
-s.on('data', function (buf) {
-    lines += buf.toString().match(/\n/g).length;
-});
-
-s.on('end', function () {
-    console.log(lines);
-});
+function readNote() {
+    console.log('Reading a note...')
+}
