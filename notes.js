@@ -1,9 +1,8 @@
 import fs from 'fs'
-import chalk  from 'chalk';
+import chalk from 'chalk';
 
 export const addNote = (argv) => {
   const notes = loadNotes()
-
   const duplicateNotes = notes.filter(note => {
     return note.title === argv.title
   });
@@ -33,17 +32,15 @@ const loadNotes = () => {
   } catch (e) {
     return []
   }
-
 }
 
 export const removeNote = (argv) => {
   const notes = loadNotes()
-
   const remainingNotes = notes.filter(note => {
     return note.title !== argv.title
   })
 
-  
+
   if (remainingNotes.length != notes.length) {
     console.log(chalk.green.inverse(argv.title + ' is removed.'))
     saveNote(remainingNotes)
@@ -52,15 +49,11 @@ export const removeNote = (argv) => {
   }
 }
 
-export const listNotes = (argv) => {
-  const note = {
-    title: argv.title,
-    body: argv.body
-  }
-
-  const noteJSON = JSON.stringify(note)
-  fs.writeFileSync('notes.json', noteJSON)
+export const listNotes = () => {
+  const notes = loadNotes()
+  notes.map((note) => console.log(note.title))
 }
+
 export const readNote = (argv) => {
   const note = {
     title: argv.title,

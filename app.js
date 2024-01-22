@@ -26,3 +26,4 @@ const removeOptions = {
 
 argv.command('add', 'Add a new note', addOptions, addNote).parse()
 argv.command('remove', 'Remove a new note', removeOptions, removeNote).parse()
+argv.command('list', 'List the note titles', listNotes).parse()
