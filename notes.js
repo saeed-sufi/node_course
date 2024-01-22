@@ -1,13 +1,10 @@
 import fs from 'fs'
 import chalk from 'chalk';
 
-export const addNote = (argv) => {
+const addNote = (argv) => {
   const notes = loadNotes()
-  const duplicateNotes = notes.filter(note => {
-    return note.title === argv.title
-  });
-
-  if (duplicateNotes.length === 0) {
+  const duplicateNote = notes.find(note => note.title === argv.title)
+  if (!duplicateNote) {
     notes.push({
       title: argv.title,
       body: argv.body
@@ -34,7 +31,7 @@ const loadNotes = () => {
   }
 }
 
-export const removeNote = (argv) => {
+const removeNote = (argv) => {
   const notes = loadNotes()
   const remainingNotes = notes.filter(note => {
     return note.title !== argv.title
@@ -49,19 +46,20 @@ export const removeNote = (argv) => {
   }
 }
 
-export const listNotes = () => {
+const listNotes = () => {
   const notes = loadNotes()
   notes.map((note) => console.log(note.title))
 }
 
-export const readNote = (argv) => {
-  const note = {
+const readNote = (argv) => {
+  const argNote = {
     title: argv.title,
     body: argv.body
   }
-
-  const noteJSON = JSON.stringify(note)
-  fs.writeFileSync('notes.json', noteJSON)
+  const notes = loadNotes()
+  const n = notes.find(note => argNote.title === note.title)
+  n ? console.log(n.body) : console.log(chalk.red(`Note with title ${argNote.title} not found.`))
 }
 
+export { addNote, removeNote, listNotes, readNote }
 

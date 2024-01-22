@@ -24,6 +24,15 @@ const removeOptions = {
   }
 }
 
-argv.command('add', 'Add a new note', addOptions, addNote).parse()
-argv.command('remove', 'Remove a new note', removeOptions, removeNote).parse()
+
+const readOptions = {
+  title: {
+    describe: 'Note title',
+    demandOption: true,
+    type: 'string'
+  }
+}
+// argv.command('add', 'Add a new note', addOptions, addNote).parse()
+// argv.command('remove', 'Remove a new note', removeOptions, removeNote).parse()
 argv.command('list', 'List the note titles', listNotes).parse()
+// argv.command('read', 'Read a note', readOptions, readNote).parse()
