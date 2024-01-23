@@ -32,7 +32,21 @@ const readOptions = {
     type: 'string'
   }
 }
-// argv.command('add', 'Add a new note', addOptions, addNote).parse()
-// argv.command('remove', 'Remove a new note', removeOptions, removeNote).parse()
-argv.command('list', 'List the note titles', listNotes).parse()
-// argv.command('read', 'Read a note', readOptions, readNote).parse()
+
+switch (process.argv[2]) {
+  case 'add':
+    argv.command('add', 'Add a new note', addOptions, addNote).parse()
+    break;
+  case 'remove':
+    argv.command('remove', 'Remove a new note', removeOptions, removeNote).parse()
+    break;
+  case 'read':
+    argv.command('read', 'Read a note', readOptions, readNote).parse()
+    break
+  case 'list':
+    argv.command('list', 'List the note titles', listNotes).parse()
+    break
+  default:
+    console.log('Command not known!')
+    break;
+}
